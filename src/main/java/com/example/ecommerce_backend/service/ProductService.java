@@ -60,7 +60,7 @@ public class ProductService {
     @PreAuthorize("hasRole('ADMIN')")
     public ProductResponse update(String id, ProductRequest productRequest){
         System.out.println(id);
-        Product product = productRepository.findById(id).orElseThrow(() -> new AppException("Item not existed"));
+        Product product = productRepository.findById(id).orElseThrow(() -> new AppException("Product not existed"));
         productMapper.updateItem(product, productRequest);
         productRepository.save(product);
         return productMapper.toProductResponse(product);

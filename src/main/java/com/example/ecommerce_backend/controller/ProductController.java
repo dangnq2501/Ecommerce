@@ -35,7 +35,7 @@ public class ProductController {
         return apiResponse;
 
     }
-    @DeleteMapping()
+    @DeleteMapping(("{id}"))
     ApiResponse<Object> detele(@PathVariable("id") String id){
         ApiResponse< Object> apiResponse = new ApiResponse<>();
         productService.delete(id);
@@ -45,11 +45,11 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    ApiResponse<ProductResponse> update(@PathVariable("id") String id, @RequestBody @Valid ProductRequest itemRequest){
-        ProductResponse item = productService.findById(id);
+    ApiResponse<ProductResponse> update(@PathVariable("id") String id, @RequestBody @Valid ProductRequest productRequest){
+        ProductResponse product = productService.findById(id);
         ApiResponse<ProductResponse> apiResponse = new ApiResponse<>();
-        ProductResponse itemResponse = productService.create(itemRequest);
-        apiResponse.setResult(itemResponse);
+        ProductResponse productResponse = productService.update(id, productRequest);
+        apiResponse.setResult(productResponse);
         return apiResponse;
 
     }
