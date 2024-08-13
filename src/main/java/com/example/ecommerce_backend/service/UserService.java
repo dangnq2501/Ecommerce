@@ -5,8 +5,11 @@ import com.example.ecommerce_backend.dto.request.UserUpdateRequest;
 import com.example.ecommerce_backend.dto.response.UserResponse;
 import com.example.ecommerce_backend.exception.AppException;
 import com.example.ecommerce_backend.mapper.UserMapper;
+import com.example.ecommerce_backend.models.Cart;
+import com.example.ecommerce_backend.models.CartItem;
 import com.example.ecommerce_backend.models.Role;
 import com.example.ecommerce_backend.models.User;
+import com.example.ecommerce_backend.repository.CartRepository;
 import com.example.ecommerce_backend.repository.RoleRepository;
 import com.example.ecommerce_backend.repository.UserRepository;
 import lombok.AccessLevel;
@@ -20,8 +23,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,29 +36,38 @@ public class UserService implements IUserService {
     RoleRepository roleRepository;
     UserMapper userMapper;
     PasswordEncoder passwordEncoder;
+    CartRepository cartRepository;
     @Override
     public UserResponse createUser(UserCreationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException("User already existed");
         }
         User user = userMapper.toUser(request);
-        String id = String.format("%s%s", user.getUsername(), user.getPhone());
-        user.setId(id);
-        System.out.println(user.getId());
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         List<Role> roles = roleRepository.findAllById(request.getRoles());
+
         user.setRoles(new HashSet<>(roles));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        Cart cart = new Cart();
+        List<CartItem> cartItems = new ArrayList<>();
+        cart.setCartItems(cartItems);
+        cart.setTotal_price(0);
+        cartRepository.save(cart);
         for(Role r: roles){
-            System.out.println(r);
+            System.out.println("Role: " + r.getName());
         }
+
+        user.setCart_id(cart.getCart_id());
+        System.out.print("Cart ID: ");
+        System.out.println(user.getCart_id());
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public UserResponse updateUser(String userId, UserUpdateRequest request) {
+    public UserResponse updateUser(UUID userId, UserUpdateRequest request) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new AppException("User not existed"));
 
@@ -82,15 +96,15 @@ public class UserService implements IUserService {
     }
 
     @Override
-    @PostAuthorize("returnObject.username == authentication.name")
-    public UserResponse getUserById(String id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public UserResponse getUserById(UUID id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new AppException("User not existed"));
-
         return userMapper.toUserResponse(user);
     }
 
     @Override
+    @PostAuthorize("returnObject.username == authentication.name")
     public UserResponse getMyInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -110,7 +124,7 @@ public class UserService implements IUserService {
 
     @Override
     @PreAuthorize("hasRole('ADMIN')")
-    public void deleteUser(String id) {
+    public void deleteUser(UUID id) {
         userRepository.deleteById(id);
     }
 

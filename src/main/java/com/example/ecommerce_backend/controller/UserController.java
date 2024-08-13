@@ -12,6 +12,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -39,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    ApiResponse<UserResponse> updateUser(@PathVariable("id") String id, @RequestBody @Valid UserUpdateRequest request)  {
+    ApiResponse<UserResponse> updateUser(@PathVariable("id") UUID id, @RequestBody @Valid UserUpdateRequest request)  {
 
         UserResponse userResponse = userService.updateUser(id, request);
         ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
@@ -55,8 +56,9 @@ public class UserController {
         return apiResponse;
     }
     @GetMapping("/{id}")
-    ApiResponse<UserResponse> getUser(@PathVariable("id") String id)  {
+    ApiResponse<UserResponse> getUser(@PathVariable("id") UUID id)  {
         UserResponse userResponse = userService.getUserById(id);
+        System.out.println(userResponse.getCart_id());
         ApiResponse<UserResponse> apiResponse = new ApiResponse<>();
         apiResponse.setResult(userResponse);
         return apiResponse;
@@ -71,7 +73,7 @@ public class UserController {
         return apiResponse;
     }
     @DeleteMapping("/{id}")
-    ApiResponse<Object> detekeUser(@PathVariable("id") String id)  {
+    ApiResponse<Object> deteleUser(@PathVariable("id") UUID id)  {
         userService.deleteUser(id);
         ApiResponse<Object> apiResponse = new ApiResponse<>();
         apiResponse.setMessage("User has been deleted!");

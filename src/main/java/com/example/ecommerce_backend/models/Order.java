@@ -1,8 +1,11 @@
 package com.example.ecommerce_backend.models;
+import org.hibernate.annotations.JdbcTypeCode;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.UUID;
 
 @Entity(name="\"order\"")
 @Data
@@ -13,7 +16,8 @@ import lombok.experimental.FieldDefaults;
 public class Order {
     @Id
     @Column(name="\"order_id\"")
-    String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID id;
 
     @Column(name="\"quantity\"")
     int quantity;

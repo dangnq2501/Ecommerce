@@ -1,20 +1,25 @@
 package com.example.ecommerce_backend.models;
 
+import org.hibernate.annotations.JdbcTypeCode;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Set;
+import java.util.UUID;
+
 @Entity(name="user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class User {
     @Id
     @Column(name="user_id")
-    String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID id;
 
     @Column(name="username")
     String username;
@@ -30,6 +35,9 @@ public class User {
 
     @Column(name="enabled")
     boolean isEnable;
+
+    @Column(name="cart_id")
+    UUID cart_id;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {
             CascadeType.PERSIST,

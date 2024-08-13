@@ -6,6 +6,9 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="cart")
 @Data
@@ -16,15 +19,23 @@ import java.util.List;
 public class Cart {
     @Id
     @Column(name="cart_id")
-    String cart_id;
-
-    @Column(name="user_id")
-    String user_id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    UUID cart_id;
 
     @Column(name="total_price")
     double total_price;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> items = new ArrayList<>();
+    @ManyToMany (fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    @JoinTable(
+            name = "cart_list",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "cart_item_id")
+    )
+    List<CartItem> cartItems;
 
 }

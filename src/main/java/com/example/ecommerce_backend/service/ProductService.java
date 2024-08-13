@@ -13,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -26,7 +27,7 @@ public class ProductService {
         return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
     }
 
-    public ProductResponse findById(String id){
+    public ProductResponse findById(UUID id){
         Product product = productRepository.findById(id).orElseThrow(() -> new AppException("Product not existed"));
         return productMapper.toProductResponse(product);
     }
@@ -43,22 +44,17 @@ public class ProductService {
         Product product = productMapper.toProduct(productRequest);
         System.out.println(product.getImageFile());
         System.out.println(product.getCategory());
-        String id = generateProductId(product.getCategory(), product.getName());
-        if(productRepository.existsById(id)){
-            throw new AppException("Product already existed");
-        }
-        product.setId(id);
         productRepository.save(product);
         return productMapper.toProductResponse(product);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void delete(String id){
+    public void delete(UUID id){
         productRepository.deleteById(id);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public ProductResponse update(String id, ProductRequest productRequest){
+    public ProductResponse update(UUID id, ProductRequest productRequest){
         System.out.println(id);
         Product product = productRepository.findById(id).orElseThrow(() -> new AppException("Product not existed"));
         productMapper.updateItem(product, productRequest);

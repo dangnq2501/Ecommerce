@@ -1,5 +1,6 @@
-package com.example.ecommerce_backend.dto.response;
+package com.example.ecommerce_backend.dto.request;
 
+import com.example.ecommerce_backend.models.Product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -10,11 +11,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class ProductResponse {
+public class CartItemRequest {
     UUID id;
-    String name;
-    String category;
-    String description;
-    String imageFile;
+    Product product;
+    int quantity;
     double price;
 }

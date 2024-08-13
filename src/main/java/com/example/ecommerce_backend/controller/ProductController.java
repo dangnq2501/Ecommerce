@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/product")
@@ -36,7 +37,7 @@ public class ProductController {
 
     }
     @DeleteMapping(("{id}"))
-    ApiResponse<Object> detele(@PathVariable("id") String id){
+    ApiResponse<Object> detele(@PathVariable("id") UUID id){
         ApiResponse< Object> apiResponse = new ApiResponse<>();
         productService.delete(id);
         apiResponse.setMessage("Item has been deleted!");
@@ -45,7 +46,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    ApiResponse<ProductResponse> update(@PathVariable("id") String id, @RequestBody @Valid ProductRequest productRequest){
+    ApiResponse<ProductResponse> update(@PathVariable("id") UUID id, @RequestBody @Valid ProductRequest productRequest){
         ProductResponse product = productService.findById(id);
         ApiResponse<ProductResponse> apiResponse = new ApiResponse<>();
         ProductResponse productResponse = productService.update(id, productRequest);

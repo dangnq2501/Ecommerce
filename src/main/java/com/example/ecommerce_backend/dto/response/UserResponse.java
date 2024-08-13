@@ -1,7 +1,10 @@
 package com.example.ecommerce_backend.dto.response;
 
+import com.example.ecommerce_backend.models.CartItem;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.util.UUID;
 
 @Data
 @Builder
@@ -9,8 +12,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserResponse {
+    UUID id;
     String username;
     String password;
     String email;
     boolean enabled;
+    UUID cart_id;
 }

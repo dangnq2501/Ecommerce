@@ -4,12 +4,15 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class ProductRequest {
+    UUID id;
     @Size(min=4, message = "Name_invalid")
     String name;
     @Size(min=4, message = "Category_invalid")
