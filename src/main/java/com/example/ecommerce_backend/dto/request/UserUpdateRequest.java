@@ -1,9 +1,11 @@
 package com.example.ecommerce_backend.dto.request;
 
+import com.example.ecommerce_backend.models.Order;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,4 +21,5 @@ public class UserUpdateRequest {
     String phone;
     boolean enable;
     Set<String> roles;
+    List<Order> orders;
 }

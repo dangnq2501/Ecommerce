@@ -1,6 +1,5 @@
 package com.example.ecommerce_backend.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -16,14 +15,21 @@ import java.util.UUID;
 public class CartItem {
     @Id
     @Column(name="cart_item_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
     @Column(name="price")
     double price;
+
+    @Column(name="cart_id")
+    UUID cart_id;
+
     @Column(name="quantity")
     int quantity;
 
-    @OneToOne
-    Product product;
+
+
+    @Column(name="product_id")
+    UUID product_id;
+
 }

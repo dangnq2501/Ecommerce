@@ -1,9 +1,11 @@
 package com.example.ecommerce_backend.dto.response;
 
 import com.example.ecommerce_backend.models.CartItem;
+import com.example.ecommerce_backend.models.Order;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,4 +20,5 @@ public class UserResponse {
     String email;
     boolean enabled;
     UUID cart_id;
+    List<Order> orders;
 }

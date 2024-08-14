@@ -5,10 +5,7 @@ import com.example.ecommerce_backend.dto.request.UserUpdateRequest;
 import com.example.ecommerce_backend.dto.response.UserResponse;
 import com.example.ecommerce_backend.exception.AppException;
 import com.example.ecommerce_backend.mapper.UserMapper;
-import com.example.ecommerce_backend.models.Cart;
-import com.example.ecommerce_backend.models.CartItem;
-import com.example.ecommerce_backend.models.Role;
-import com.example.ecommerce_backend.models.User;
+import com.example.ecommerce_backend.models.*;
 import com.example.ecommerce_backend.repository.CartRepository;
 import com.example.ecommerce_backend.repository.RoleRepository;
 import com.example.ecommerce_backend.repository.UserRepository;
@@ -51,6 +48,8 @@ public class UserService implements IUserService {
 
         Cart cart = new Cart();
         List<CartItem> cartItems = new ArrayList<>();
+        List<Order> orders = new ArrayList<>();
+        user.setOrders(orders);
         cart.setCartItems(cartItems);
         cart.setTotal_price(0);
         cartRepository.save(cart);

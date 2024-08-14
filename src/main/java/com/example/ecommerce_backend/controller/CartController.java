@@ -26,6 +26,14 @@ public class CartController {
         return apiResponse;
     }
 
+    @PostMapping("/user/{userId}/cart/delete/{productId}")
+    ApiResponse<CartResponse> deleteCartItem(@PathVariable("userId") UUID userId,
+                                          @PathVariable("productId") UUID productID){
+        CartResponse cartResponse = cartService.deleteCartItem(userId, productID);
+        ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(cartResponse);
+        return apiResponse;
+    }
     @GetMapping("/user/{userId}/cart")
     ApiResponse<CartResponse> getCart(@PathVariable("userId") UUID userId){
         CartResponse cartResponse = cartService.getCart(userId);
@@ -33,4 +41,14 @@ public class CartController {
         apiResponse.setResult(cartResponse);
         return apiResponse;
     }
+
+    @PostMapping("/user/{userId}/cart/deleteAll")
+    ApiResponse<CartResponse> deleteAllCartItem(@PathVariable("userId") UUID userId){
+        CartResponse cartResponse = cartService.deleteAllCartItem(userId);
+        ApiResponse<CartResponse> apiResponse = new ApiResponse<>();
+        apiResponse.setResult(cartResponse);
+        return apiResponse;
+    }
+
+
 }

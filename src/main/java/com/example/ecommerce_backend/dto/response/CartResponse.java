@@ -18,7 +18,4 @@ public class CartResponse {
     UUID cart_id;
     double total_price;
     List<CartItem> cartItems;
-    Product product;
-
-
 }

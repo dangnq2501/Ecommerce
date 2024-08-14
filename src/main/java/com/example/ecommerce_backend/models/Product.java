@@ -16,7 +16,7 @@ import java.util.UUID;
 public class Product {
     @Id
     @Column(name="product_id")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
     @Column(name="name")

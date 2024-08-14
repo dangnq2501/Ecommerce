@@ -1,10 +1,8 @@
 package com.example.ecommerce_backend.dto.request;
 
-import com.example.ecommerce_backend.models.Product;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -12,9 +10,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class CartItemRequest {
+public class OrderRequest {
     UUID id;
-    UUID product_id;
-    int quantity;
-    double price;
+    UUID cart_id;
+    String username;
+    boolean paid;
+    String status;
+    String address;
+    double total_cost;
+    double shipping_cost;
 }

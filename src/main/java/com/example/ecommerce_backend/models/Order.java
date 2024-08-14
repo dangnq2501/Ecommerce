@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Entity(name="\"order\"")
@@ -15,25 +16,33 @@ import java.util.UUID;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class Order {
     @Id
-    @Column(name="\"order_id\"")
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="order_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     UUID id;
 
-    @Column(name="\"quantity\"")
-    int quantity;
+    @Column(name="address")
+    String address;
 
-    @Column(name="\"paid\"")
+    @Column(name="create_at")
+    Date create_at;
+
+    @Column(name="paid")
     boolean paid;
 
-    @OneToOne
-    @JoinColumn(name = "\"product_id\"")
-    Product product;
+    @Column(name="status")
+    String status;
 
-    @ManyToOne
-    @JoinColumn(name = "\"user_id\"")
-    User user;
+    @Column(name="cart_id")
+    UUID cart_id;
 
+    @Column(name="username")
+    String username;
 
+    @Column(name="shipping_cost")
+    double shipping_cost;
+
+    @Column(name="total_cost")
+    double total_cost;
 
 }
 
