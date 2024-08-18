@@ -1,8 +1,7 @@
 package com.example.ecommerce_backend.dto.response;
 
 import com.example.ecommerce_backend.models.CartItem;
-import com.example.ecommerce_backend.models.User;
-import com.example.ecommerce_backend.models.Product;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

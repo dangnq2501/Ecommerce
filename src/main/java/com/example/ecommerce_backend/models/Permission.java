@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Permission {
+public class Permission{
     @Id
     @Column(name="permission_name")
     String name;

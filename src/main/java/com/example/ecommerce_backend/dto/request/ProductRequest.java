@@ -20,4 +20,5 @@ public class ProductRequest {
     String description;
     String imageFile;
     double price;
+    int stockQuantity;
 }

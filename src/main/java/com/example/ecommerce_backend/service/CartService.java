@@ -70,7 +70,6 @@ public class CartService {
         newCartItem.setProduct_id(product.getId());
         newCartItem.setPrice(product.getPrice());
         newCartItem.setQuantity(1);
-        newCartItem.setCart_id(cart.getCart_id());
         System.out.println("Set sucessfully");
         cartItemRepository.save(newCartItem);
         System.out.println("Save sucessfully");

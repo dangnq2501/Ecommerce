@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Order {
+public class Order{
     @Id
     @Column(name="order_id")
     @GeneratedValue(strategy = GenerationType.AUTO)

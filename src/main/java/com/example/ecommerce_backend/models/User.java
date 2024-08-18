@@ -5,7 +5,8 @@ import org.hibernate.annotations.JdbcTypeCode;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
+import com.example.ecommerce_backend.models.Order;
+import com.example.ecommerce_backend.models.Role;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;

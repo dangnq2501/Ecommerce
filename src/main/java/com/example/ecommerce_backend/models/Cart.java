@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Cart {
+public class Cart{
     @Id
     @Column(name="cart_id")
     @GeneratedValue(strategy = GenerationType.AUTO)

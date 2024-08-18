@@ -49,8 +49,15 @@ public class ProductService {
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    public void delete(UUID id){
-        productRepository.deleteById(id);
+    public ProductResponse delete(UUID id){
+        Product product = productRepository.findById(id).orElseThrow(() -> new AppException("Product not existed"));
+        if(product.getStockQuantity() > 0){
+            product.setStockQuantity(product.getStockQuantity()-1);
+        }
+        else{
+            throw  new AppException(("Product is out of stock"));
+        }
+        return productMapper.toProductResponse(productRepository.save(product));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

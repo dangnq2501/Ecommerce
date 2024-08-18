@@ -12,7 +12,6 @@ import java.util.UUID;
 @FieldDefaults(level= AccessLevel.PRIVATE)
 public class OrderResponse {
     UUID id;
-    UUID cart_id;
     String username;
     boolean paid;
     String status;

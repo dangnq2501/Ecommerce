@@ -17,4 +17,5 @@ public class ProductResponse {
     String description;
     String imageFile;
     double price;
+    int stockQuantity;
 }

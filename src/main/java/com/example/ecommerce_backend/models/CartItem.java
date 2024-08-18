@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CartItem {
+public class CartItem{
     @Id
     @Column(name="cart_item_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,13 +21,8 @@ public class CartItem {
     @Column(name="price")
     double price;
 
-    @Column(name="cart_id")
-    UUID cart_id;
-
     @Column(name="quantity")
     int quantity;
-
-
 
     @Column(name="product_id")
     UUID product_id;

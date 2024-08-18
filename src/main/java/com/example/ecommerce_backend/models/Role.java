@@ -10,7 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @FieldDefaults(level= AccessLevel.PRIVATE)
-public class Role {
+public class Role{
     @Id
     @Column(name="role_name")
     String name;

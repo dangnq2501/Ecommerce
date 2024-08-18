@@ -26,11 +26,11 @@ import javax.crypto.spec.SecretKeySpec;
 public class SecurityConfig {
 
     private final String[] PUBLIC_ENDPOINTS = {
-            "/user", "/auth/token", "/auth/introspect", "/api/**", "/v3/api-docs", "/swagger-ui/**"
+            "/user", "/auth/token", "/auth/introspect", "/api/**", "/v3/api-docs/**", "/swagger-ui/**"
     };
 
     private  final  String[] DOC_ENDPOINTS = {
-            "/user","/swagger-ui/index.html", "/api-docs", "/swagger-ui-custom.html", "/v3/api-docs", "/api-docs.yml", "/swagger-ui/**", "/api/**"
+            "/user","/swagger-ui/index.html", "/api-docs", "/swagger-ui-custom.html", "/v3/api-docs/**", "/api-docs.yml", "/swagger-ui/**", "/api/**"
     };
 
     @Value("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c")

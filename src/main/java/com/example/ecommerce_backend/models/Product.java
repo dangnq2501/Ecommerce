@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product {
+public class Product{
     @Id
     @Column(name="product_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,6 +30,9 @@ public class Product {
 
     @Column(name="price")
     double price;
+
+    @Column(name="stockQuantity")
+    int stockQuantity;
 
     @Column(name="imageFile")
     String imageFile;
